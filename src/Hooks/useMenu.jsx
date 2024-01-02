@@ -12,7 +12,6 @@ const useMenu = () => {
         setLoading(false);
       });
   }, []);
-
   return [menu, loading];
 };
 
