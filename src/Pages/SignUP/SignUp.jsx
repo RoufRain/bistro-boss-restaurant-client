@@ -1,7 +1,18 @@
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
-  const handleSignUP = () => {};
+  //   const handleSignUP = () => {};
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
   return (
     <div className="hero min-h-screen bg-base-200">
@@ -15,37 +26,49 @@ const SignUp = () => {
           </p>
         </div>
         <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <form onSubmit={handleSignUP} className="card-body">
+          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name</span>
               </label>
               <input
                 type="text"
+                {...register("name", { required: true })}
                 name="name"
                 placeholder="Name"
                 className="input input-bordered"
-                required
+
+                //required
               />
+              {errors.name && (
+                <span className="text-red-500">*Name field is required</span>
+              )}
             </div>
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
               <input
                 type="email"
+                {...register("email", { required: true })}
                 name="email"
                 placeholder="email"
                 className="input input-bordered"
-                required
+                // required
               />
+              {errors.email && (
+                <span className="text-red-500">*Email field is required</span>
+              )}
             </div>
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
               <input
                 type="password"
+                {...register("password")}
                 name="password"
                 placeholder="password"
                 className="input input-bordered"
